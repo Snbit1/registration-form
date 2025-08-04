@@ -83,6 +83,21 @@ button[type="button"]:hover {
     opacity: 1;
 }
 
+button[type="submit"] {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 1.4rem 2rem;
+    margin: 0.8rem 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.8;
+}
+
+button[type="submit"]:hover {
+    opacity: 1;
+}
+
 button.cancelBtn {
     background-color: #f44336;
 }
@@ -92,6 +107,7 @@ button.cancelBtn {
 }
 
 .sign-up {
+    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -100,6 +116,13 @@ button.cancelBtn {
     min-height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, .7);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sign-up.show {
+    display: block;
+    opacity: 1;
 }
 
 .sign-up-content {
@@ -107,6 +130,12 @@ button.cancelBtn {
     margin: 5% auto 15% auto;
     width: 50%;
     border: .1rem solid #888;
+    transform: translateY(-50px);
+    transition: transform 0.3s ease;
+}
+
+.sign-up.show .sign-up-content {
+    transform: translateY(0);
 }
 
 hr {
