@@ -1,6 +1,6 @@
 import { modalEl } from "./modalWindow.js"
 import { validateEmail, validatePassword } from "./validation.js"
-import axios from "axios"
+import { showError, clearError } from "./errorHandler.js"
 
 document.addEventListener('DOMContentLoaded', () => {
     const formEl = document.querySelector('form.sign-up-content')
@@ -13,24 +13,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const passRepeat = formEl['pass-repeat'].value.trim()
         const remember = formEl.remember.checked
 
+        clearError(formEl.email)
         if (!email) {
-            alert('Введите email')
+            showError(formEl.email, 'Введите email')
             return
         }
         if (!validateEmail(email)) {
-            alert('Введите корректный email')
+            showError(formEl.email, 'Введите корректный email')
             return
         }
+
+        clearError(formEl.pass)
         if (!pass) {
-            alert('Введите пароль');
-            return;
+            showError(formEl.pass, 'Введите пароль')
+            return
         }
         if (!validatePassword(pass)) {
-            alert('Пароль должен содержать минимум 8 символов, включая хотя бы одну букву и одну цифру')
+            showError(formEl.pass, 'Пароль должен содержать минимум 8 символов, включая хотя бы одну букву и одну цифру')
             return
         }
+
+        clearError(formEl['pass-repeat'])
         if (pass !== passRepeat) {
-            alert('Пароли не совпадают пароль')
+            showError(formEl['pass-repeat'], 'Пароли не совпадают')
             return
         }
 
@@ -46,6 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             alert('Ошибка при отправке данных. Попробуйте позже.')
             console.error(error)
-    }
-  })
+        }
+    })
 })

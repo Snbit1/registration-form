@@ -156,3 +156,16 @@ hr {
     color: #f44336;
     cursor: pointer;
 }
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+    min-height: 5rem;
+}
+
+.error {
+    font-size: 1.5rem;
+    color: #e63946;
+    display: none;
+}
