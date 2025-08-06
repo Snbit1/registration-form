@@ -1,9 +1,4 @@
-
-
-
-
-
-
+[![CI](https://github.com/Snbit1/registration-form/actions/workflows/ci.yml/badge.svg)](https://github.com/Snbit1/registration-form/actions/workflows/ci.yml)
 
 # Registration Form
 
