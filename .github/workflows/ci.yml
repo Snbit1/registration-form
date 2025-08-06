@@ -1,0 +1,29 @@
+name: CI  # Название workflow, оно будет отображаться во вкладке Actions
+
+on:       # Определяет, когда запускать этот workflow
+  push:   # 1️⃣ Событие: когда есть пуш в репозиторий
+    branches: [ main ]  # Запускать только если пуш в ветку "main"
+  pull_request:         # Событие: при создании Pull Request (PR)
+    branches: [ main ]  # Запускать только если PR направлен в "main"
+
+jobs:     # Описываем задачи, которые выполняются в CI
+  build:  # Название job'а (можно любое, например, "build" или "test")
+    runs-on: ubuntu-latest  # Указываем на какой ОС запускать (здесь Ubuntu)
+
+    steps:  # Шаги, которые будут выполняться последовательно
+      - name: Checkout code       # Название шага (чисто для читаемости в логах)
+        uses: actions/checkout@v3 # Действие: скачиваем код из репозитория в виртуальную машину
+
+      - name: Setup Node.js        # Настройка Node.js для проекта
+        uses: actions/setup-node@v3 # Официальный action для установки Node.js
+        with:
+          node-version: 22         # Указываем, какую версию Node.js установить
+
+      - name: Install dependencies # Установка зависимостей проекта
+        run: npm ci           # Выполняет команду npm install в терминале CI
+
+      - name: Run ESLint           # (опционально) Запуск линтера для проверки кода
+        run: npx eslint .          # Запускаем ESLint на всех файлах проекта
+
+      - name: Run tests            # Запуск тестов
+        run: npm test              # Выполняем команду npm test (у нас Jest)
